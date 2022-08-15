@@ -1,8 +1,26 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/tabbar/index/index",
 		"style": {
-			"navigationBarTitleText": "uni-app"
+			"app-plus": {
+				"titleNView": false
+			}
+		}
+	},
+	{
+		"path": "pages/tabbar/learn/learn",
+		"style": {
+			"app-plus": {
+				"titleNView": false
+			}
+		}
+	},
+	{
+		"path": "pages/tabbar/home/home",
+		"style": {
+			"app-plus": {
+				"titleNView": false
+			}
 		}
 	}],
 	"globalStyle": {
@@ -13,5 +31,29 @@
 		"app-plus": {
 			"background": "#efeff4"
 		}
+	},
+	"tabBar": {
+		"color": "#b1b0be",
+		"selectedColor": "#000",
+		"list": [
+			{
+				"iconPath": "static/tabbar/index1.png",
+				"selectedIconPath": "static/tabbar/index1_selected.png",
+				"pagePath": "pages/tabbar/index/index",
+				"text": "首页"
+			},
+			{
+				"iconPath": "static/tabbar/learn.png",
+				"selectedIconPath": "static/tabbar/learn_selected.png",
+				"pagePath": "pages/tabbar/learn/learn",
+				"text": "学习"
+			},
+			{
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home_selected.png",
+				"pagePath": "pages/tabbar/home/home",
+				"text": "我的"
+			}
+		]
 	}
 }
