@@ -6,7 +6,7 @@ class Storage {
    * @param {*} value 
    */
   static set(key,value){
-    wx.setStorageSync(key, value)
+    uni.setStorageSync(key, value)
   }
 
   /**
@@ -14,7 +14,7 @@ class Storage {
    * @param {*} key 
    */
   static get(key){
-    return wx.getStorageSync(key) || ""
+    return uni.getStorageSync(key) || ""
   }
 
   /**
@@ -22,30 +22,35 @@ class Storage {
    * @param {*} key 
    */
   static remove(key){
-    wx.removeStorageSync()
+    uni.removeStorageSync()
   }
 
   /**
    * 清空本地存储的数据
    */
   static removeAll(){
-    wx.clearStorageSync()
+    uni.clearStorageSync()
   }
 
   /**
    * 存储token
    */
   static setToken(token){
-    wx.setStorageSync(publicConfig.field.loginCredentials, token)
+    uni.setStorageSync(publicConfig.field.loginCredentials, token)
   }
   static getToken(){
-    return wx.getStorageSync(publicConfig.field.loginCredentials)
+    return uni.getStorageSync(publicConfig.field.loginCredentials)
   }
  /**
   * 存储用户信息
   */
  static setUserInfo(userInfo){
-   wx.setStorageSync(publicConfig.field.userInfoKey, userInfo)
+   uni.setStorageSync(publicConfig.field.userInfoKey, userInfo)
+   
+ }
+ static getUserInfo(){
+  return uni.getStorageSync(publicConfig.field.userInfoKey) || {}
+   
  }
 }
 
