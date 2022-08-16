@@ -10,7 +10,7 @@
 			</view> -->
 			<div class="left">
 				<image :src="item.cover"></image>
-				<span>{{types[item.type]}}</span>
+				<span>{{types[item.type]||'暂无'}}</span>
 			</div>
 			<div class="right">
 				<p>{{item.title}}</p>

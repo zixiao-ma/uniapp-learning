@@ -3,7 +3,7 @@
 		<view class="group-list" v-for="item in data" :key="item.id">
 			<view class="top">
 				<image :src="item.cover"></image>
-				<span>{{types[item.type]}}</span>
+				<span>{{types[item.type]||'暂无'}}</span>
 				<p>{{item.title}}</p>
 				<p class='desc' v-html="item.try"></p>
 				<p> <text class="red">￥{{item.price}}</text> <s>￥{{item.t_price}}</s> </p>

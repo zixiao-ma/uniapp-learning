@@ -3,8 +3,8 @@
 		<swiper class="swiper" circular :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval"
 			:duration="duration">
 			<swiper-item v-for="(item,index) in data" :key="index">
-				<view class="swiper-item">
-					<image :src="item.src"></image>
+				<view class="swiper-item" :class="index===0?'pink':'green'">
+					<image :src="item.src" mode="heightFix"></image>
 				</view>
 			</swiper-item>
 		</swiper>
@@ -38,6 +38,7 @@
 	}
 
 	.swiper-item {
+		text-align: center;
 		image {
 			width: 100%;
 			height: 100%;
@@ -46,7 +47,15 @@
 
 		height: 300rpx;
 		overflow: hidden;
-		background-color: pink;
 		border-radius: 10rpx;
+		transition: all .2s;
+	
 	}
+	.pink{
+			background: linear-gradient(#ff94a5,#e54870);
+	}
+	.green{
+		background-color: #03ac54;
+	}
+	/* #ff94a5 #e54870 */
 </style>
