@@ -1,29 +1,37 @@
 <template>
-	<view class="animate__animated animate__fadeIn main_box">
-		<!-- #ifdef APP-PLUS -->
-			<view style="height: 60rpx;"></view>
-		<!-- #endif -->
-		<!-- 搜索区域 -->
-		<m-search-bar :placeholder='mainData.placeholder'></m-search-bar>
-		<!-- 轮播图 -->
-		<m-swiper :data='mainData.swiperData'></m-swiper>
-		<!-- nav 部分 -->
-		<m-nav-bar :data='mainData.navData'></m-nav-bar>
-		<!-- 优惠券部分 -->
-		<m-coupon-list :data='CouponData'></m-coupon-list>
-		<!-- 分割线+标题 -->
-		<view class="divider"></view>
-		<m-title-bar leftText='拼团'></m-title-bar>
-		<!-- 拼团 -->
-		<m-group-list :data='groupData'></m-group-list>
-		<!-- 分割线+标题 -->
-		<view class="divider"></view>
-		<m-title-bar leftText='最新列表' rightText='查看更多'></m-title-bar>
-		<!-- 最新拼团列表 -->
-		<m-latest-group :data='mainData.latestGroup'></m-latest-group>
-		<!-- 底部图片 -->
-		<view class="divider"></view>
-		<m-footer-view :data='mainData.footerView'></m-footer-view>
+	<view class="main_box">
+		<m-skeleton-index v-if="!loading"></m-skeleton-index>
+		<view v-else class='animate__animated animate__fadeIn'>
+			<!-- #ifdef APP-PLUS -->
+				<view style="height: 60rpx;"></view>
+			<!-- #endif -->
+			<!-- 搜索区域-->
+			<m-search-bar :placeholder='mainData.placeholder' v-if="permission.includes('search')"></m-search-bar>
+			<!-- 轮播图 -->
+			<m-swiper :data='mainData.swiperData' v-if="permission.includes('swiper')"></m-swiper>
+			<!-- nav 部分 -->
+			<m-nav-bar :data='mainData.navData' v-if="permission.includes('icons')"></m-nav-bar>
+			<!-- 优惠券部分 -->
+			<m-coupon-list :data='CouponData' v-if="permission.includes('coupon')"></m-coupon-list>
+			<!-- 分割线+标题 -->
+			<view class="divider" v-if="permission.includes('promotion')"></view>
+			<m-title-bar leftText='拼团' v-if="permission.includes('promotion')"></m-title-bar>
+			<!-- 拼团 -->
+			<m-group-list :data='groupData' v-if="permission.includes('promotion')"></m-group-list>
+			<!-- 分割线+标题 -->
+			<view class="divider" v-if="permission.includes('list')"></view>
+			<m-title-bar leftText='最新列表' rightText='查看更多' v-if="permission.includes('list')"></m-title-bar>
+			<!-- 最新拼团列表 -->
+			
+			<m-latest-group :data='mainData.latestGroup' v-if="permission.includes('list')"></m-latest-group>
+			<!-- 热门排行 -->
+			<view class="divider" v-if="permission.includes('list')"></view>
+			<m-title-bar leftText='热门推荐' rightText='查看全部' v-if="permission.includes('list')"></m-title-bar>
+			<m-hot-list :data='mainData.latestGroup'></m-hot-list>
+			<!-- 底部图片 -->
+			<view class="divider" v-if="permission.includes('imageAd')"></view>
+			<m-footer-view :data='mainData.footerView' v-if="permission.includes('imageAd')"></m-footer-view>
+		</view>
 	</view>
 </template>
 
@@ -34,9 +42,11 @@
 	export default {
 		data() {
 			return {
+				loading:false,
 				indexData: [],
 				CouponData: [],
-				groupData: []
+				groupData: [],
+				permission:[]
 			}
 		},
 		computed: {
@@ -59,25 +69,27 @@
 				return obj
 			}
 		},
+		
 		onReady() {
-			this.getIndexData()
-			this.getCouponList()
-			this.getGroupList()
-		},
-		onLoad() {
-
+			this.loadRequest()
 		},
 		onPullDownRefresh() {
-			this.getIndexData()
-			this.getCouponList()
-			this.getGroupList()
+		this.loadRequest()
 			this.indexData && uni.stopPullDownRefresh()
 		},
 		methods: {
+			async loadRequest(){
+				this.loading = false
+				await this.getIndexData()
+				await this.getCouponList()
+				await this.getGroupList()
+				this.loading = true
+			},
 			async getIndexData() {
 				const res = await IndexApi.getIndexData()
 				console.log(res);
 				this.indexData = res.data
+				this.permission = this.indexData.map(item=>item.type)
 			},
 			async getCouponList() {
 				const res = await IndexApi.getCouponList()

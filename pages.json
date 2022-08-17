@@ -11,9 +11,8 @@
 		{
 			"path": "pages/tabbar/learn/learn",
 			"style": {
-				"app-plus": {
-					"titleNView": false
-				}
+				"navigationBarTitleText": "学习进度",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
@@ -31,9 +30,74 @@
 				}
 			}
 
+		}, {
+			"path": "pages/user/bindPhone/bindPhone",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		}, {
+			"path": "pages/user/editUserInfo/editUserInfo",
+			"style": {
+				"navigationBarTitleText": "编辑用户",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/setting/setting",
+			"style": {
+				"navigationBarTitleText": "我的设置",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/editPassword/editPassword",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/findPassword/findPassword",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+
+		}, {
+			"path": "pages/user/order-list/order-list",
+			"style": {
+				"navigationBarTitleText": "订单列表",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/my-coupon/my-coupon",
+			"style": {
+				"navigationBarTitleText": "我的优惠券",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/fava-list/fava-list",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/user/msg-list/msg-list",
+			"style": {
+				"navigationBarTitleText": "消息列表",
+				"enablePullDownRefresh": false
+			}
+
 		}
-        ,{
-            "path" : "pages/user/bindPhone/bindPhone",
+	    ,{
+            "path" : "pages/shop/search/search",
             "style" :                                                                                    
             {
                "app-plus": {
@@ -43,19 +107,19 @@
             
         }
         ,{
-            "path" : "pages/user/editUserInfo/editUserInfo",
+            "path" : "pages/shop/courseDetail/courseDetail",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "编辑用户",
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             
         }
         ,{
-            "path" : "pages/user/setting/setting",
+            "path" : "pages/shop/courseList/courseList",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "我的设置",
+                "navigationBarTitleText": "课程列表",
                 "enablePullDownRefresh": false
             }
             

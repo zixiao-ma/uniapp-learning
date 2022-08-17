@@ -1,7 +1,7 @@
 <template>
 	<view class="title-bar">
 		<h3>{{leftText}}</h3>
-		<small>{{rightText}}</small>
+		<small @click='toAllCourse'>{{rightText}}</small>
 	</view>
 </template>
 
@@ -14,7 +14,14 @@
 			return {
 				
 			};
-		}
+		},
+		methods: {
+			toAllCourse() {
+				uni.navigateTo({
+					url:'/pages/shop/courseList/courseList'
+				})
+			}
+		},
 	}
 </script>
 
@@ -22,7 +29,7 @@
 	.title-bar{
 		display: flex;
 		justify-content: space-between;
-		padding: 35rpx 17rpx;
+		padding: 25rpx 17rpx;
 	}
 h3{
 	font-size: 30rpx;

@@ -13,7 +13,7 @@
 					<p>{{isLogin?userInfo.nickname:'立即登录'}}</p>
 					<small>{{isLogin?userInfo.desc:'登录解锁更多功能'}}</small>
 				</div>
-				<div class='editInfoIcon '>
+				<div class='editInfoIcon ' v-if="isLogin">
 					<uni-icons type="settings-filled"></uni-icons>
 				</div>
 			</div>
@@ -40,7 +40,15 @@
 </template>
 
 <script>
-	import Storage from '@/utils/storage.js'
+	import Storage from '@/utils/storage.js';
+	const pagePath = {
+		order:'/pages/user/order-list/order-list',
+		info:'/pages/user/msg-list/msg-list',
+		star:'/pages/user/fava-list/fava-list',
+		gift:'/pages/user/my-coupon/my-coupon',
+		setting:'/pages/user/setting/setting'
+		
+	}
 	export default {
 		data() {
 			return {
@@ -64,7 +72,7 @@
 					{
 						icon:'auth',
 						title:'在学',
-						ket:'learn'
+						key:'learn'
 					}
 				],
 				btmlist:[
@@ -100,28 +108,45 @@
 				const Info = Storage.getUserInfo()
 				if(JSON.stringify(Info)!=='{}'){
 					this.isLogin = true
+				}else{
+					this.isLogin = false
 				}
 				this.userInfo = Info
 			},
+			checkLogin(){
+				const token = Storage.getToken()
+				 return Boolean(token)
+			},
+			navigatorPath(key){
+				
+				if(key){
+					if(key==='learn'){
+						uni.switchTab({
+							url:'/pages/tabbar/learn/learn'
+						})
+					}else{
+						if(this.checkLogin()){
+							uni.navigateTo({
+								url:pagePath[key]
+							})
+						}else{
+							uni.showToast({
+								title:'请登陆后操作！'
+							})
+							uni.navigateTo({
+								url:'/pages/user/login/login'
+							})
+						}
+						
+					}
+					
+				}
+			},
 			handleActionClick(key) {
-				uni.showToast({
-					title:`点击了${key}`,
-					icon:'none'
-				})
+				this.navigatorPath(key)
 			},
 			handleBottomClick(key) {
-				switch(key){
-					case 'setting':
-					this.handleToSetting()
-					break;
-					default:
-					return 
-					break;
-				}
-				uni.showToast({
-					title:`点击了${key}`,
-					icon:'none'
-				})
+				this.navigatorPath(key)
 			},
 			handleClickLogin(){
 				if(!this.isLogin){

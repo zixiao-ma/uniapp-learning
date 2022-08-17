@@ -31,7 +31,7 @@ class Storage {
   static removeAll(){
     uni.clearStorageSync()
   }
-
+	
   /**
    * 存储token
    */

@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="container" @click="toSearchPage">
 		<uni-search-bar :placeholder="placeholder" bgColor="#f5f5f3" @confirm="search" readonly="" />
 	</view>
 </template>
@@ -12,7 +12,14 @@
 			return {
 
 			};
-		}
+		},
+		methods: {
+			toSearchPage() {
+				uni.navigateTo({
+					url:'/pages/shop/search/search'
+				})
+			}
+		},
 	}
 </script>
 
