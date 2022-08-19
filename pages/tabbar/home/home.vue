@@ -7,10 +7,10 @@
 			</div>
 			<div class="login_view flex align-center" @click='handleClickLogin'>
 				<div class="avatar">
-					<image :src="isLogin?userInfo.avatar:notLoginAvatar" ></image>
+					<image :src="isLogin?(userInfo.avatar||notLoginAvatar):notLoginAvatar" ></image>
 				</div>
 				<div class="login_Info">
-					<p>{{isLogin?userInfo.nickname:'立即登录'}}</p>
+					<p>{{isLogin?(userInfo.nickname||'填写资料'):'立即登录'}}</p>
 					<small>{{isLogin?userInfo.desc:'登录解锁更多功能'}}</small>
 				</div>
 				<div class='editInfoIcon ' v-if="isLogin">
@@ -99,9 +99,11 @@
 		},
 		onShow() {
 			this.getUserInfo()
+			this.checkLogin()
 		},
 		onReady() {
 			this.getUserInfo()
+					this.checkLogin()
 		},
 		methods: {
 			getUserInfo(){
@@ -154,6 +156,11 @@
 						url:'/pages/user/login/login'
 					})
 				}else{
+					if(!this.userInfo.phone){
+						return uni.navigateTo({
+							url:'/pages/user/bindPhone/bindPhone'
+						})
+					}
 					uni.navigateTo({
 						url:'/pages/user/editUserInfo/editUserInfo'
 					})
